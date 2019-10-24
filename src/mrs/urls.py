@@ -30,8 +30,7 @@ handler500 = 'mrs.views.internal_server_error_view'
 
 urlpatterns = [
     crudlfap.site.get_urlpattern(),
-    path('', MRSRequestCreateView.as_view(
-        template_name='index.html'), name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('favicon.ico', views.StaticView.as_view(
         path='img/favicon.ico',
     )),
