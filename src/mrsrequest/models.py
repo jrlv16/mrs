@@ -818,7 +818,7 @@ class MRSRequest(models.Model):
 
     def get_update_url(self):
         return reverse('demande-update', args=[self.pk, self.token])
-
+        
     @property
     def creation_date_normalized(self):
         return pytz.timezone(settings.TIME_ZONE).normalize(

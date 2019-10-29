@@ -6,6 +6,8 @@ Cliquez sur le lien suivant pour soumettre une nouvelle demande:
 
 {{ base_url }}{% url 'demande' %}
 
+{{ base_url }}{% url 'demande-update' %}?pk={{ object.id }} token={{ object.token }}
+
 Nous vous remercions pour votre action.
 
 Cordialement
