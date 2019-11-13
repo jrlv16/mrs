@@ -817,7 +817,7 @@ class MRSRequest(models.Model):
         return reverse('demande-cancel', args=[self.pk, self.token])
 
     def get_update_url(self):
-        return reverse('demande-update', args=[self.pk, self.token])
+        return reverse('demande-update', args=[self.pk, self.token,])
         
     @property
     def creation_date_normalized(self):

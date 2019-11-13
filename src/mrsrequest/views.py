@@ -382,6 +382,35 @@ class MRSRequestUpdateView(MRSRequestUpdateBaseView):
         return super().get(request, *args, **kwargs)
 
 
+class MRSRequestReCreateView(MRSRequestFormBaseView):
+    template_name = 'mrsrequest/form.html'
+    base = 'base.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = MRSRequest()
+        self.object.allow(request)
+        self.pk = kwargs.get('pk', None)
+        self.demande = MRSRequest.objects.get(id=self.pk)
+        id_caisse = self.demande.caisse.id
+        id_region = self.demande.caisse.regions.get(caisse=id_caisse)
+        self.caisse_form = CaisseVoteForm(prefix=id_caisse)
+        insured = self.demande.insured
+
+        print(id_region, id_caisse, insured)
+        
+        # context = ({'caisse':id_caisse, 'insured': insured})
+        self.forms = collections.OrderedDict([
+            ('mrsrequest', MRSRequestCreateForm(
+                instance=self.object,
+            )),
+            ('transport', TransportIterativeForm()),
+            ('transport_formset', TransportFormSet()),
+            ('certify', CertifyForm()),
+            ('use_email', UseEmailForm()),
+        ])
+        return super().get(request, *args, **kwargs)
+
+
 class MRSRequestCancelView(MRSRequestUpdateBaseView):
     template_name = 'mrsrequest/cancel.html'
 

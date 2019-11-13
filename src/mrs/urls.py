@@ -11,6 +11,7 @@ from mrsrequest.views import (
     MRSRequestCancelView,
     MRSRequestCreateView,
     MRSRequestUpdateView,
+    MRSRequestReCreateView,
 )
 from mrs.settings import TITLE_SUFFIX
 
@@ -37,11 +38,18 @@ urlpatterns = [
     )),
     path('demande', MRSRequestCreateView.as_view(), name='demande'),
     # too early for this little one
+    # path(
+    #     'modifier-demande/<pk>/<token>',
+    #     MRSRequestUpdateView.as_view(),
+    #     name='demande-update'
+    # ),
+
     path(
         'modifier-demande/<pk>/<token>',
-        MRSRequestUpdateView.as_view(),
+        MRSRequestReCreateView.as_view(),
         name='demande-update'
-    ),
+     ),
+
     path(
         'annuler-demande/<pk>/<token>',
         MRSRequestCancelView.as_view(),
